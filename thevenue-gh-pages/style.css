@@ -1,0 +1,1035 @@
+/*
+Theme Name: The Venue
+Description: Un elegante tema WordPress per ristoranti e locali di ristorazione. Design moderno e responsivo con sezioni dedicate per menu, prenotazioni e gallery di piatti.
+Author: Restaurant Theme Developer
+Version: 1.0.0
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: thevenue
+Domain Path: /languages
+Tags: restaurant, food, dining, responsive, modern, elegant, one-page, custom-menu, theme-options, translation-ready
+Requires at least: 5.0
+Tested up to: 6.5
+Requires PHP: 7.4
+
+The Venue WordPress Theme, Copyright 2025
+The Venue is distributed under the terms of the GNU GPL
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+*/
+
+@charset "utf-8";
+
+/* 
+=====================================
+THE VENUE - Restaurant Theme Styles
+=====================================
+
+[Table of Contents]
+
+1. CSS Variables & Root Styles
+2. Fonts & Typography
+3. Base Styles & Resets
+4. Layout & Grid System
+5. Header & Navigation
+6. Hero Section
+7. Introduction Section
+8. Video Section
+9. Signature Dishes
+10. Menu Section
+11. Reservations
+12. Footer
+13. Components & Utilities
+14. Animations & Transitions
+15. Responsive Design
+
+=====================================
+*/
+
+/* =====================================
+   1. CSS Variables & Root Styles
+   ===================================== */
+
+:root {
+  /* Color Palette */
+  --primary-color: #db5246;
+  --secondary-color: #b49383;
+  --accent-color: #ffa07f;
+  --text-primary: #232323;
+  --text-secondary: #636363;
+  --text-light: #a5a5a5;
+  --white: #ffffff;
+  --gray-light: #f7f7f7;
+  --overlay-dark: rgba(0, 0, 0, 0.7);
+  --overlay-light: rgba(255, 255, 255, 0.9);
+  
+  /* Typography */
+  --font-primary: 'PT Sans Narrow', sans-serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-brush: 'Alex Brush', cursive;
+  --font-edward: 'Edward', serif;
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 4rem;
+  --spacing-xxl: 6rem;
+  
+  /* Border Radius */
+  --border-radius: 8px;
+  --border-radius-lg: 16px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s ease;
+}
+
+/* =====================================
+   2. Fonts & Typography
+   ===================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&family=PT+Sans+Narrow:wght@400;700&display=swap');
+
+@font-face {
+  font-family: 'Edward';
+  src: url('./font/edwardian_script_itc.ttf') format('truetype'),
+       url('./font/edwardian_script_itc.otf') format('opentype');
+  font-display: swap;
+}
+
+/* Typography Scale */
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-base { font-size: 1rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-4xl { font-size: 2.25rem; }
+.text-5xl { font-size: 3rem; }
+
+/* =====================================
+   3. Base Styles & Resets
+   ===================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background-color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Remove default list styles */
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Image defaults */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Link defaults */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+/* Button reset */
+button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+/* =====================================
+   4. Layout & Grid System
+   ===================================== */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -var(--spacing-sm);
+}
+
+.col {
+  flex: 1;
+  padding: 0 var(--spacing-sm);
+}
+
+.col-6 { flex: 0 0 50%; }
+.col-4 { flex: 0 0 33.333333%; }
+.col-3 { flex: 0 0 25%; }
+.col-8 { flex: 0 0 66.666667%; }
+.col-12 { flex: 0 0 100%; }
+
+/* =====================================
+   5. Header & Navigation
+   ===================================== */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  z-index: 1000;
+  transition: var(--transition-smooth);
+}
+
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.header_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) 0;
+}
+
+.logo {
+  font-family: var(--font-edward);
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  font-weight: normal;
+}
+
+.main_nav ul {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.main_nav a {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  padding: var(--spacing-xs) 0;
+}
+
+.main_nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: var(--transition-smooth);
+}
+
+.main_nav a:hover::after,
+.main_nav a.active::after {
+  width: 100%;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  padding: var(--spacing-xs);
+}
+
+.hamburger_line {
+  width: 25px;
+  height: 3px;
+  background: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+.hamburger.active .hamburger_line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active .hamburger_line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .hamburger_line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.reservations_phone {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+/* =====================================
+   6. Hero Section
+   ===================================== */
+
+.hero {
+  height: 100vh;
+  min-height: 600px;
+  background: linear-gradient(var(--overlay-dark), var(--overlay-dark)),
+              url('./images/home.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+  position: relative;
+}
+
+.hero_content {
+  max-width: 800px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero_title {
+  font-family: var(--font-edward);
+  font-size: clamp(3rem, 8vw, 8rem);
+  margin-bottom: var(--spacing-md);
+  color: var(--white);
+}
+
+.hero_subtitle {
+  font-family: var(--font-script);
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  margin-bottom: var(--spacing-lg);
+  color: var(--secondary-color);
+}
+
+.hero_description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  margin-bottom: var(--spacing-xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =====================================
+   7. Introduction Section
+   ===================================== */
+
+.intro {
+  padding: var(--spacing-xxl) 0;
+  background: var(--gray-light);
+}
+
+.intro_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+.intro_content {
+  padding: var(--spacing-lg);
+}
+
+.intro_title {
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.intro_text {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  margin-bottom: var(--spacing-lg);
+}
+
+.intro_image {
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.intro_image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(219, 82, 70, 0.1) 100%);
+  z-index: 1;
+}
+
+/* =====================================
+   8. Video Section
+   ===================================== */
+
+.video_section {
+  position: relative;
+  height: 400px;
+  background: linear-gradient(var(--overlay-dark), var(--overlay-dark)),
+              url('./images/video.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video_play_button {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 3px solid var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.video_play_button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.video_play_button i {
+  color: var(--white);
+  font-size: 2rem;
+  margin-left: 4px;
+}
+
+/* =====================================
+   9. Signature Dishes
+   ===================================== */
+
+.signature_dishes {
+  padding: var(--spacing-xxl) 0;
+}
+
+.section_title {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.section_title h2 {
+  font-family: var(--font-script);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.section_title p {
+  font-size: 1.125rem;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dishes_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.dish_card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-smooth);
+}
+
+.dish_card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.dish_image {
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.dish_content {
+  padding: var(--spacing-lg);
+}
+
+.dish_name {
+  font-family: var(--font-script);
+  font-size: 1.75rem;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.dish_description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.dish_price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+/* =====================================
+   10. Menu Section
+   ===================================== */
+
+.menu_section {
+  padding: var(--spacing-xxl) 0;
+  background: var(--gray-light);
+}
+
+.menu_tabs {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.menu_tab {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--white);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.menu_tab:hover,
+.menu_tab.active {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.menu_content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.menu_item {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.menu_item_image {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--border-radius);
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.menu_item_content {
+  flex: 1;
+}
+
+.menu_item_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-xs);
+}
+
+.menu_item_name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.menu_item_price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.menu_item_description {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* =====================================
+   11. Reservations
+   ===================================== */
+
+.reservations {
+  padding: var(--spacing-xxl) 0;
+  background: linear-gradient(var(--overlay-dark), var(--overlay-dark)),
+              url('./images/reservations.jpg') center/cover no-repeat;
+  color: var(--white);
+  text-align: center;
+}
+
+.reservations_content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.reservations_title {
+  font-family: var(--font-script);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: var(--spacing-md);
+}
+
+.reservations_text {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  margin-bottom: var(--spacing-xl);
+}
+
+.reservation_form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.form_group {
+  position: relative;
+}
+
+.form_input,
+.form_select {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--border-radius);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  font-size: 1rem;
+  transition: var(--transition-fast);
+}
+
+.form_input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form_input:focus,
+.form_select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* =====================================
+   12. Footer
+   ===================================== */
+
+.footer {
+  background: var(--text-primary);
+  color: var(--white);
+  padding: var(--spacing-xxl) 0 var(--spacing-lg);
+}
+
+.footer_content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.footer_section h3 {
+  font-family: var(--font-script);
+  font-size: 1.75rem;
+  color: var(--accent-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.footer_section p,
+.footer_section li {
+  line-height: 1.8;
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer_section a:hover {
+  color: var(--accent-color);
+}
+
+.social_links {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.social_link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.social_link:hover {
+  background: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.footer_bottom {
+  text-align: center;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+}
+
+/* =====================================
+   13. Components & Utilities
+   ===================================== */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: var(--transition-fast);
+  cursor: pointer;
+  border: 2px solid transparent;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.btn-outline:hover {
+  background: var(--white);
+  color: var(--text-primary);
+}
+
+.btn-lg {
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: 1.125rem;
+}
+
+/* Spacing Utilities */
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+.mt-5 { margin-top: var(--spacing-xl); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+.mb-5 { margin-bottom: var(--spacing-xl); }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* =====================================
+   14. Animations & Transitions
+   ===================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.fade-in-left {
+  animation: fadeInLeft 0.8s ease-out;
+}
+
+.fade-in-right {
+  animation: fadeInRight 0.8s ease-out;
+}
+
+/* Scroll animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================================
+   15. Responsive Design
+   ===================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+  :root {
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-xxl: 4rem;
+  }
+  
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .main_nav {
+    display: none;
+  }
+  
+  .hamburger {
+    display: flex;
+  }
+  
+  .intro_container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .menu_content {
+    grid-template-columns: 1fr;
+  }
+  
+  .menu_item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .menu_item_header {
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .reservation_form {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer_content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    text-align: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .hero {
+    min-height: 500px;
+  }
+  
+  .hero_content {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .dishes_grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .menu_tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .menu_tab {
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1300px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .header,
+  .hamburger,
+  .video_section,
+  .reservations {
+    display: none;
+  }
+  
+  .hero {
+    height: auto;
+    min-height: auto;
+    background: none;
+    color: var(--text-primary);
+  }
+  
+  .hero_title,
+  .section_title h2 {
+    color: var(--text-primary);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-color: #000000;
+    --secondary-color: #333333;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+  }
+}
+
+/* Dark mode preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white: #1a1a1a;
+    --gray-light: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-light: #999999;
+  }
+  
+  .header {
+    background: var(--white);
+    color: var(--text-primary);
+  }
+  
+  .dish_card,
+  .menu_item {
+    background: #2a2a2a;
+    color: var(--text-primary);
+  }
+}
